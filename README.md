@@ -1,2 +1,4 @@
-# web-330
-Enterprise JavaScript II - Web Development
+# WEB 330 Enterprise JavaScript II
+## Contributors
+* Richard Krasso
+* Patrick Cuauro
