@@ -1,37 +1,95 @@
 /*
 ===========================================
-; Title: Assignment 1.3
+; Title: Site.css
 ; Author: Professor Krasso
-; Date: 10 20 2022
+; Date: 01 05 2023
 ; Modified by: Patrick Cuauro
-; Description: style sheet for Web-231.
+; Description: style sheet for Web-330
 ===========================================
 */
+/*Included 01 05 2023*/
+.app-header {
+  text-align: center;
+  width: 600px;
+}
+.return-home {
+  color: #4f3674;
+  text-decoration: none;
+}
+.return-home:hover {
+  background-color: #d6a800;
+  color: #4f3674;
+}
+.return-home:visited {
+  color: #3c275a;
+}
+.form {
+  display: inline-grid;
+  grid-template-columns: auto;
+}
+
+.form-field {
+  padding: 20px;
+}
+.full-width {
+  width: 100%;
+}
+
 body {
-    font-family: 'Oswald', 'Verdana', 'Arial', sans-serif;
+  font-family: "Oswald", "Verdana", "Arial", sans-serif;
 }
-
+/*fourth number added to the margin properties per requirements*/
 #container {
-    margin: 50px 100px 0;
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
-h1, h2, h3, h4 {
-    background-color: #3C275A;
-    color: white;
-    border: 1px solid #D6A800;
-    padding: 10px;
+#icon-mode:hover {
+  cursor: pointer;
 }
 
-a {
-    color: #453674;
-    text-decoration: none;
+#icon-text {
+  padding-left: 10px;
+}
+
+.pull-right {
+  float: right;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  background-color: #3c275a;
+  color: white;
+  border: 1px solid #d6a800;
+  padding: 10px;
+}
+
+/*a {
+  color: #453674;
+  text-decoration: none;
 }
 
 a:hover {
-    background-color: #D6A800;
-    color: #453674;
+  background-color: #d6a800;
+  color: #453674;
 }
 
 a:visited {
-    color: #3C275A;
+  color: #3c275a;
+}*/
+/*Added per requirements WEB330*/
+
+.assign-container {
+  padding: 10px;
+}
+.assign-content {
+  width: 600px;
+  margin: 3% auto 0;
+}
+.assign-results-text {
+  text-align: center;
+  font-size: 28px;
 }

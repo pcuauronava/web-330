@@ -1,0 +1,138 @@
+/*
+===========================================
+; Title: Theme.css
+; Author: Professor Krasso
+; Date: 01 05 2023
+; Modified by: Patrick Cuauro
+; Description: style sheet for Web-330.
+===========================================
+*/
+/*Included 01 05 2023*/
+.card {
+  background-color: var(--card-background-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 600px;
+  /*width: 50%;*/
+  grid-template-columns: auto;
+  display: inline-grid;
+  margin: 3% auto 0;
+}
+.card-title {
+  color: var(--card-title-color);
+  text-align: center;
+  font-size: 2em;
+  color: #4f3674;
+  font-weight: 400;
+}
+.card-content {
+  padding: 2px 16px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.btn {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 15px 32px;
+  color: #000;
+}
+.btn-primary {
+  background-color: var(--btn-background-color);
+  color: var(--btn-color);
+}
+.btn-primary:hover {
+  background-color: var(--btn-hover-background-color);
+  color: var(--btn-hover-color);
+}
+.input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.drop-down-menu {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+body.light-theme {
+  --text-color: #000;
+  --background-color: #fff;
+  --anchor-color: #3c275a;
+  --h1-background-color: #3c275a;
+  --h1-border-color: #d6a800;
+  --heading-background-color: #3c275a;
+  --heading-color: #fff;
+  --heading-border-color: #d6a800;
+  --anchor-hover-color: #4f3674;
+  --anchor-hover-background-color: #d6a800;
+  --card-background-color: #fff;
+  --card-title-color: #4f3674;
+  --btn-background-color: #4f3674;
+  --btn-color: #fff;
+  --btn-hover-background-color: #d6a800;
+  --btn-hover-color: #4f3674;
+  --input-border-color: #ccc;
+}
+
+body.dark-theme {
+  --text-color: #fafafa;
+  --background-color: #303030;
+  --anchor-color: #fff;
+  --h1-background-color: #9c27b0;
+  --h1-border-color: #9c27b0;
+  --heading-background-color: #424242;
+  --heading-color: #fff;
+  --heading-border-color: #424242;
+  --anchor-hover-color: #d176e1;
+  --anchor-hover-background-color: #303030;
+  --card-background-color: #424242;
+  --card-title-color: #d176e1;
+  --btn-background-color: #d176e1;
+  --btn-color: #fff;
+  --btn-hover-background-color: #7d4787;
+  --btn-hover-color: #fff;
+  --input-border-color: #303030;
+}
+* {
+  font-family: "Oswald", Verdana, Arial, sans-serif;
+}
+
+body {
+  color: var(--text-color);
+  background: var(--background-color);
+}
+a {
+  color: var(--anchor-color);
+  text-decoration: none;
+}
+a:hover {
+  background-color: var(--anchor-hover-background-color);
+  color: var(--anchor-hover-color);
+}
+h1 {
+  color: var(--heading-color);
+  background-color: var(--h1-background-color);
+  padding: 10px;
+  border: solid 1px var(--h1-border-color);
+}
+h2,
+h3,
+h4 {
+  color: var(--heading-color);
+  background-color: var(--heading-background-color);
+  padding: 10px;
+  border: solid 1px var(--heading-border-color);
+}

@@ -1,207 +1,75 @@
 /**
 ==================================================
-;   Title: style.css
+;   Title: Global.css
 ;   Author: Richard Krasso
-;   Date: 10 23 2022
+;   Date: 01 05 2023
 ;   Modified by: Patrick Cuauro
-;   Description: Styling from previous Assignments
+;   Description: Global Styling for WEB330
 ================================================== 
  */
 body {
-    margin: 0;
-    padding: 20px;
-    font-family: 'Oswald', Verdana, Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  font-family: "Oswald", Verdana, Arial, sans-serif;
 }
-
-/*styling from inherited from previous classes - start. According to instructions from
-HTML, CSS, and JavaScript Requirements */
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 600px;
-    /*width: 50%;*/
-    grid-template-columns: auto;
-    display: inline-grid;
-    margin: 3% auto 0;
-}
-
-.card-title {
-    text-align: center;
-    font-size: 2em;
-    color: #4F3674;
-    font-weight: 400;
-}
-
-#card-example {
-    width: 600px;
-    margin: 3% auto 0;
-}
-
-.card-content {
-    padding: 2px 16px;
-}
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.btn {
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    padding: 15px 32px;
-    color: #000;
-}
-
-.btn-primary {
-    background-color: #4F3674;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background-color: #D6A800;
-    color: #4F3674;
-}
-
-.input {
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.form {
-    display: inline-grid;
-    grid-template-columns: auto;
-}
-
-.form-field {
-    padding: 20px;
-}
-
-/*styling from inherited from previous classes - end*/
 
 header {
-    background-color: #3c275a;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+  background-color: #3c275a;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
 
 h1 {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 #navbar {
-    overflow: hidden;
-    background-color: #4F3674;
-    border-bottom: 15px solid #D6A800;
+  overflow: hidden;
+  background-color: #4f3674;
+  border-bottom: 15px solid #d6a800;
 }
 
 #navbar a {
-    float: left;
-    display: block;
-    color: #fff;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  float: left;
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 #navbar a:hover {
-    background-color: #D6A800;
-    color: #4F3674;
+  background-color: #d6a800;
+  color: #4f3674;
 }
 
 #container {
-    padding: 10px;
-
-    /* Assignment 9.2 styles */
-    /*margin: 2% 5% 100px;*/
+  padding: 10px;
 }
 
 footer {
-    background-color: #4F3674;
-    /* position: absolute; */
-    bottom: 0;
-    width: 100%;
-
-    /* Assignment 9.2 styles */
-    position: fixed;
-    left: 0;
+  background-color: #4f3674;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  left: 0;
 }
 
 footer p {
-    color: #FFF;
-    font-weight: 400;
-    float: right;
-    padding-right: 10px;
-    font-style: italic;
-    font-size: .75em;
+  color: #fff;
+  font-weight: 400;
+  float: right;
+  padding-right: 10px;
+  font-style: italic;
+  font-size: 0.75em;
 }
 
 footer a {
-    text-decoration: none;
-    color: #FFF;
+  text-decoration: none;
+  color: #fff;
 }
 
 footer a:hover {
-    text-decoration: underline;
-}
-
-#books {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-#books th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4F3674;
-    color: #fff;
-}
-
-#books td, #books th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#books tr:hover {
-    background-color: #D6A800;
-    color: #4F3674;
-    cursor: pointer;
-}
-
-/* included later on 11/10/2022 */
-
-.app-header {
-    text-align: center;
-    width: 600px;
-
-}
-/* included later on 11/11/2022 */
-
-.return-home {
-    color: #4F3674;
-    text-decoration: none;
-}
-
-.return-home:hover {
-    background-color: #D6A800;
-    color:#4F3674 ;
-}
-
-.return-home:visited {
-    color: #3c275a;
+  text-decoration: underline;
 }
