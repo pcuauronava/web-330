@@ -10,7 +10,10 @@
 /*Included 01 05 2023*/
 .app-header {
   text-align: center;
-  width: 600px;
+  font-weight: 400;
+  border: none;
+  color: inherit;
+  background-color: inherit;
 }
 .return-home {
   color: #4f3674;
@@ -38,7 +41,6 @@
 body {
   font-family: "Oswald", "Verdana", "Arial", sans-serif;
 }
-/*fourth number added to the margin properties per requirements*/
 #container {
   margin-top: 50px;
   margin-left: 100px;
