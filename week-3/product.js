@@ -7,10 +7,11 @@
 ; Description: Product file acting as module.
 ===========================================
 */
-export class Product
-{
-    constructor(name, price)
-    {
+//1) create a class named "Product" with parameters
+//name and price
+//class needs to be imported
+export class Product {
+    constructor(name, price) {
         this.name = name;
         this.price = price;
     }
