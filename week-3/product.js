@@ -15,4 +15,5 @@ export class Product {
         this.name = name;
         this.price = price;
     }
-}
+};
+btnOrder.addEventListener("click", getTotal);

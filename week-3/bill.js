@@ -39,8 +39,8 @@ export class Bill {
 function getTotal() {
     let total = 0;
 
-    let beverageTotal = this._beverages.forEach(addBeverage(item)
+    let beverageTotal = this._beverages.forEach(addBeverage(item))
     {
-            total += parseFloat(beverage.price);
-});
+        total += parseFloat(beverage.price);
+    }
 }

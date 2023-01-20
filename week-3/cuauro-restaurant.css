@@ -7,3 +7,11 @@
 ; Description: style sheet restaurant
 ===========================================
 */
+.card-grid {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-auto-columns: auto;
+    text-align: justify;
+    box-shadow: inherit;
+    transition: inherit;
+}
