@@ -13,7 +13,7 @@
 //passed them to the parent class
 //using super
 //class exported
-import { Product } from "./product";
+import Product from "./product.js";
 
 export class MainCourse extends Product {
     constructor(name, price) {

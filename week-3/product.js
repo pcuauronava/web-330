@@ -10,10 +10,9 @@
 //1) create a class named "Product" with parameters
 //name and price
 //class needs to be imported
-export class Product {
+export default class Product {
     constructor(name, price) {
         this.name = name;
         this.price = price;
     }
 };
-btnOrder.addEventListener("click", getTotal);

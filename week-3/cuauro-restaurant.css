@@ -7,11 +7,12 @@
 ; Description: style sheet restaurant
 ===========================================
 */
+/* class included to display the items */
+/* of the menu */
 .card-grid {
+    padding-left: 15px;
     display: grid;
-    grid-auto-rows: auto;
-    grid-auto-columns: auto;
-    text-align: justify;
-    box-shadow: inherit;
-    transition: inherit;
+    grid-template-columns: 280px 280px;
+    column-gap: 10px;
+    row-gap: 10px;
 }

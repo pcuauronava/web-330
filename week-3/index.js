@@ -7,6 +7,7 @@
 ; Description: Homepage script file.
 ===========================================
 */
+//this file works as the entry point for the other modules
 export * from "./appetizer.js";
 export * from "./beverage.js";
 export * from "./dessert.js";

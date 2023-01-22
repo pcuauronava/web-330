@@ -14,7 +14,7 @@
 //pass the parameters to the parent
 //using super
 //export
-import { Product } from "./product";
+import Product from "./product.js";
 
 export class Beverage extends Product {
     constructor(name, price) {
