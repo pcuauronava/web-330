@@ -26,7 +26,7 @@ export class CalorieConverter {
     //with a single string parameter
     //make sure this is ok
     static find(id) {
-        const result = this.data.filter(dat => data.name == "Egg");
+        let result = this.data.filter(dat => data.name == "Egg");
         console.log(result);
     };
 };
