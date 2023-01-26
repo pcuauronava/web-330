@@ -1,0 +1,16 @@
+/*
+===========================================
+; Title: cuauro-calorie.css
+; Author: Professor Krasso
+; Date: 01 23 2023
+; Modified by: Patrick Cuauro
+; Description: style sheet calorie app
+===========================================
+*/
+/* step a */
+#foodList {
+    float: right;
+    color: #df546a;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
