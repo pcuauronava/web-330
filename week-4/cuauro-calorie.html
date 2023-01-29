@@ -55,32 +55,43 @@
         <a href="../index.html" class="return-home">Return</a>
         <!-- step 8 -->
         <div class="card">
-            <!-- make sure this is correct -->
             <div class="card-title">Search Results</div>
-            <div class="card-content">
-                <table class="table">
-                    <tr>
-                        <th id="food-name">Name</th>
-                        <th id="food-calories">Calories</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            Example
-                        </td>
-                        <td>
-                            Example 2
-                        </td>
-                    </tr>
-                </table>
+            <div id="searchResults" class="card-content">
             </div>
         </div>
     </div>
     <script type="module">
         // step a html
+        // import functions from files
+        // remember to use "{}" to import and specific function
         import { CalorieConverter } from "./calorie-converter.js";
-        import { FoodModel } from "./food-model.js";
-        btnSearch.addEventListener("onclick", CalorieConverter(txtFoodItemEl));
-        let txtFoodItemEl = document.getElementById("txtFoodItem");
+        import FoodModel from "./food-model.js";
+
+        //vanilla JS requires que function to be outside of the button!!!
+        btnSearch.addEventListener("click", function () {
+            //variable declarations in this scope
+            let txtFoodItemEl = document.getElementById("txtFoodItem").value;
+            //set the results to lower case and then assign them to the foods
+            let foods = CalorieConverter.find(txtFoodItemEl.toLowerCase());
+
+            //table dynamic construction
+            let lunch = "<table><tr><th>Name</th><th>Calories</th></tr>";
+            let dinner = "</table>";
+            let fullMeal = "";
+            for (const meal of foods) {
+                //the string is build among
+                lunch = lunch + "<tr><td>" + meal.name + "</td>" + "<td>" + meal.calories + "</td></tr>";
+            };
+            fullMeal = lunch + dinner;
+            document.getElementById("searchResults").innerHTML = fullMeal;
+        });
+        let input = document.getElementById("txtFoodItem");
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("btnSearch").click();
+            }
+        });
     </script>
     <script src="/theme.js"></script>
 </body>
