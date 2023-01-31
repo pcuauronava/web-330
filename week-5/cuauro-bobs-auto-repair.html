@@ -1,0 +1,99 @@
+<!--
+    ==============================================
+    ;   Title: cuauro-bobs-auto-repair.html
+    ;   Author: Richard Krasso
+    ;   Date: 01 30 2023
+    ;   Modified by: Patrick Cuauro
+    ;   Description: Auto repair shop app
+    ==============================================
+    -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Title of the page-->
+    <title>WEB 330 – Enterprise JavaScript II</title>
+    <!--Linked Styles including Google Fonts -->
+    <!-- CDN Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../theme.css" />
+    <link rel="stylesheet" href="../site.css" />
+    <link rel="stylesheet" href="cuauro-bobs-auto-repair.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="light-theme">
+    <div id="container">
+        <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px"><span
+                id="icon-text"></span></i><br>
+        <!-- step 1 -->
+        <h1 class="app-header">Welcome to Bob's Automotive Repair Shop!</h1>
+        <div class="card">
+            <!-- step 2 -->
+            <div class="card-title">Product Listing</div>
+            <div class="card-content">
+                <!--   step 3 -->
+                <div class="cart-component">
+                    <!-- step 4 -->
+                    <div class="form-field">
+                        Choose a product:
+                        <!-- step 5 -->
+                        <label for="product">Product List</label>
+                        <select id="productList" class="drop-down-menu">
+                            <option value="Select">--Select--</option>
+                            <option value="19.99">Oil Change</option>
+                            <option value="18.44">Filter Replacement</option>
+                            <option value="9.99">Wiper Fluid Refill</option>
+                        </select>
+                        <!-- step 6 -->
+                        <i id="cart-message"></i>
+                    </div>
+                    <div class="form-field">
+                        <!-- step 7 -->
+                        <button class="btn btn-primary" id="btnAddProduct">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- step 8 -->
+        <a href="../index.html" class="return-home">Return</a>
+        <div class="card">
+            <!-- step 9 -->
+            <div class="card-title">Shopping Cart</div>
+            <div class="card-content">
+                <!-- step 10 -->
+                <table>
+                    <tr>
+                        <th id="shoppingCart1">Id</th>
+                        <!-- step 11 -->
+                        <th id="shoppingCart2">Name</th>
+                        <th id="shoppingCart3">Price</th>
+                    </tr>
+                    <tr>
+                        <td id="shoppingCart4">Example ID</td>
+                        <td id="shoppingCart5">Example Name</td>
+                        <td id="shoppingCart6">Example Price</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="../theme.js"></script>
+    <script>
+        // this is to test the button and the code
+        btnAddProduct.addEventListener("click", function () {
+            let result = document.getElementById("productList").value;
+            document.getElementById("shoppingCart1").innerHTML = result;
+        });
+    </script>
+</body>
+
+</html>
+<!-- notes: I am going to make a test with the button to include text in the element shoppingCart1  -->
