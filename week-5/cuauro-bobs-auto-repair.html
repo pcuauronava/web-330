@@ -40,26 +40,30 @@
             <div class="card-title">Product Listing</div>
             <div class="card-content">
                 <!--   step 3 -->
-                <div class="cart-component">
-                    <!-- step 4 -->
-                    <div class="form-field">
-                        Choose a product:
-                        <!-- step 5 -->
-                        <label for="product">Product List</label>
-                        <select id="productList" class="drop-down-menu">
-                            <option value="Select">--Select--</option>
-                            <option value="19.99">Oil Change</option>
-                            <option value="18.44">Filter Replacement</option>
-                            <option value="9.99">Wiper Fluid Refill</option>
-                        </select>
-                        <!-- step 6 -->
-                        <i id="cart-message"></i>
-                    </div>
-                    <div class="form-field">
-                        <!-- step 7 -->
-                        <button class="btn btn-primary" id="btnAddProduct">Add to Cart</button>
-                    </div>
+
+                <div id="cart-component" style="align-content: center">
+                    <span id="cartIcon" class="fa fa-shopping-cart"></span>
                 </div>
+
+                <!-- step 4 -->
+                <div class="form-field">
+                    Choose a product:
+                    <!-- step 5 -->
+                    <label for="product">Product List</label>
+                    <select id="productList" class="drop-down-menu">
+                        <option name="select" value="Select">--Select--</option>
+                        <option name="Oil Change" value="19.99">Oil Change</option>
+                        <option name="Filter Replacement" value="18.44">Filter Replacement</option>
+                        <option name="Wiper Fluid Refill" value="9.99">Wiper Fluid Refill</option>
+                    </select>
+                    <!-- step 6 -->
+                    <i id="cart-message">To view your shopping cart click on the cart icon</i>
+                </div>
+                <div class="form-field">
+                    <!-- step 7 -->
+                    <button class="btn btn-primary full-width" id="btnAddProduct">Add to Cart</button>
+                </div>
+
             </div>
         </div>
         <!-- step 8 -->
@@ -69,31 +73,94 @@
             <div class="card-title">Shopping Cart</div>
             <div class="card-content">
                 <!-- step 10 -->
-                <table>
+                <!-- make sure this is ok -->
+                <table id="shoppingCart">
                     <tr>
-                        <th id="shoppingCart1">Id</th>
-                        <!-- step 11 -->
-                        <th id="shoppingCart2">Name</th>
-                        <th id="shoppingCart3">Price</th>
-                    </tr>
-                    <tr>
-                        <td id="shoppingCart4">Example ID</td>
-                        <td id="shoppingCart5">Example Name</td>
-                        <td id="shoppingCart6">Example Price</td>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
+    <!-- <button class="btn btn-primary" id="btnTest" onclick="testDefMethod()">Add to Cart</button> -->
+    <!-- link the theme control snippet from theme.js  -->
     <script src="../theme.js"></script>
-    <script>
-        // this is to test the button and the code
+
+    <script type="module">
+
+
+        // page 5 a) add import statements for the Product and ShoppingCart classes
+
+        import { Product } from "./product.js"
+        import { ShoppingCart } from "./shopping-cart.js"
+
+        // Instantiate (define a instance of the class ShoppingCart) a new shoppingCart object and assign it to a variable named shoppingCart 
+        let shoppingCart = new ShoppingCart();
+
+        // add an action to the add product button that insert the object to the array inside ShoppingCart.products
+        // and return the number of the object stored in it and place it next to the icon
+
+
+
+        //Trigger//
         btnAddProduct.addEventListener("click", function () {
-            let result = document.getElementById("productList").value;
-            document.getElementById("shoppingCart1").innerHTML = result;
+
+            // take the information from the select menu 
+            let infoProductPrice = productList.options[productList.selectedIndex].value;
+            let infoProductName = productList.options[productList.selectedIndex].text;
+
+            // add the capability to check if the value is different from "select"
+            if (infoProductPrice === "Select") {
+                alert("Select an article from the menu");
+                //stop if select is selected
+                stop;
+                // return a confirmation if an item is selected
+            } else {
+                alert(infoProductName + " " + "was added to the cart!")
+            };
+
+            // use this information to create an instance of a product (object)
+            //this should create an object with the parameters id, name and price
+            let newProduct = new Product("", infoProductName, infoProductPrice);
+            console.log(newProduct);
+
+            // add this product to the memory (array) invoking the function inside the class cart component  
+
+            shoppingCart.add(newProduct);
+
+
+            // update the icon count with the function connected Callback to insert the data inside the bootstrap icon
+            document.getElementById("cartIcon").innerHTML = shoppingCart.count().toString();
+
+            // reset the value of the select menu to avoid entering the same value twice
+            document.getElementById("productList").value = "Select";
+
+
+        });
+
+        // add function when the icon of the cart is pressed to show the table with the products
+        // Register an onclick event for the cartIcon element (see Exhibit C, item 3). 
+
+        //Trigger//
+        cartIcon.addEventListener("click", function () {
+            //this variable is 
+            let tableValues = "<table><tr><th>ID</th><th>Name</th><th>Price</th></tr>";
+            //create a dynamic table to insert the values
+            //this is going to be inserted in the page: 
+            let productsDisplay = "";
+
+            //this is for display the table
+            for (let product of shoppingCart.products) {
+                console.log(product)
+                productsDisplay += `<tr><td>${product.id}</td><td>${product.name}</td><td>${product.price}</td></tr></table>`
+            }
+            document.getElementById("shoppingCart").innerHTML = tableValues + productsDisplay;
+
+
         });
     </script>
 </body>
 
 </html>
-<!-- notes: I am going to make a test with the button to include text in the element shoppingCart1  -->
