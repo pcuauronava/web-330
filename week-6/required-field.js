@@ -14,9 +14,14 @@ export class RequiredField{
         this.field = field;
     }
     validate(){
-        this.field = true;
+        //remember to compare with an empty string
+        if(this.field !== ""){
+            return true;
+        } else {
+            return false;
+        }
     }
     getMessage(){
-        this.message = this.name + "is required field";
+        return `${this.name}  is required field.`;
     }
 }

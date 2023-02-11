@@ -7,20 +7,21 @@
 ; Description: Future Value app script
 ===========================================
 */
-class FinanceCalculator{
+export class FinanceCalculator{
     static MONTHS_IN_YEAR = 12;
-    month =this.years*MONTHS_IN_YEAR;
-    calculateFutureValue(monthlyPayment, rate, years){
-
     
+    static calculateFutureValue(monthlyPayment, rate, years){
+        let months = years * this.MONTHS_IN_YEAR;
+        let interestRate = 1 + rate/100;
+        let presentValue = monthlyPayment * months;
+        let futureValue = presentValue * (Math.pow(interestRate,months));
+        return futureValue.toFixed(2);
     }
-    interestRate = 1 + rate /100;
-    presentValue = monthlyPayment*this.month;
-    futureValue = (Math.pow(interestRate,month));
-    return Math.ceil(futureValue,2);
-
     static convertToCurrency(field){
-        currencyFormatter = new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"});
+        let currencyFormatter = new Intl.NumberFormat("en-US",{
+            style:"currency",
+            currency:"USD",
+        });
+        return currencyFormatter.format(field);
     }
-    return currencyFormatter.format(field);
 }

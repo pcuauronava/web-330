@@ -14,14 +14,20 @@ export class FloatMaxField{
         this.max = max;
     }
     validate(){
-        parseFloat(this.field);
-        if(this.field<this.max){
+        if(parseFloat(this.field) < this.max){
             return true;
         } else {
             return false;
         }
+        // previous error
+        // parseFloat(this.field);
+        // if(this.field<this.max){
+        //     return true;
+        // } else {
+        //     return false;
+        // }
     }
     getMessage(){
-        return this.name + "must be less than" + this.max + "You Entered" + this.field;
+        return `${this.name} must be less than ${this.max}. You Entered ${this.field}`;
     }
 }

@@ -7,41 +7,41 @@
 ; Description: Future Value app script
 ===========================================
 */
-import { RequiredField } from "./required-field";
-import { FloatField } from "./float-field";
-import { FloatMinField } from "./float-min-field";
-import { FloatMaxField } from "./float-max-field";
-let validators = [];
-let messages = [];
-class Validator{
-    addRequiredField(max){
-        this.validators.push(new RequiredField(this.name,this.field,max))
+import { RequiredField } from "./required-field.js";
+import { FloatField } from "./float-field.js";
+import { FloatMinField } from "./float-min-field.js";
+import { FloatMaxField } from "./float-max-field.js";
+
+export class Validator{
+    //in this case the arrays goes inside the class. remember "class properties"
+    validators = [];
+    messages = [];
+    
+    constructor(name,field){
+        this.name = name;
+        this.field = field;
     }
-    addRequiredFloatField(max){
-        this.validators.push(new FloatField(this.name,this.field,max))
+    //verify this setting a breakpoint
+    addRequiredField(){
+        this.validators.push(new RequiredField(this.name,this.field));
     }
-    addRequiredFloatMinField(max){
-        this.validators.push(new FloatMinField(this.name,this.field,max))
+    addRequiredFloatField(){
+        this.validators.push(new FloatField(this.name,this.field));
     }
-    addRequiredFloatMaxField(max){
-        this.validators.push(new FloatMaxField(this.name,this.field,max))
+    addFloatMinField(min){
+        this.validators.push(new FloatMinField(this.name,this.field, min));
+    }
+    addFloatMaxField(max){
+        this.validators.push(new FloatMaxField(this.name,this.field, max));
     }
     validate(){
-        for (const fields of validators) {
-            if(){
-                iterate;
+        //use let instead of const, don't forget the "this" keyword
+        for (let item of this.validators) {
+            if(item.validate() === false) {
+                this.messages.push(item.getMessage());
+                return false;
             }            
         }
         return true;
     }
-}
-
-validate(){
-    for (let i of validator){
-        i.validate();
-        if (false){
-            messages.push(getMessage(i));
-        }
-    }
-    return true;
 }

@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../flex-layout.css" />
     <link rel="stylesheet" href="../theme.css" />
     <link rel="stylesheet" href="../site.css" />
-    <link rel="stylesheet" href="cuauro-bobs-auto-repair.css" />
+    <link rel="stylesheet" href="cuauro-future-value.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -39,47 +39,149 @@
         <h1 class="app-header">Welcome to Future Value App!</h1>
         <div class="card">
             <!-- step 2 -->
-            <div class="card-title">Listing</div>
+            <div class="card-title">Future Value Calculator</div>
+            <div class="row">
+                <div id="errorLog" class="danger col-12"></div>
+            </div>
             <div class="card-content">
-                <!--   step 3 -->
-                <div id="cart-component">
+                <div class="form">
+                    <div class="form-field">
+                        <label for="txtMonthlyPayment" class="form-label col-5">
+                            <!-- look for form-label class -->
+                            Monthly Payment:
+                        </label>
+                        <input type="text" id="txtMonthlyPayment" class="col-7">
+                        <label for="interestRate" class="form-label col-5">Interest Rate:</label>
+                        <input type="text" id="txtYearlyRate" class="col-7">
+                        <i class="danger">Enter 11% as 11.1:</i>
+                        <label for="numberYears" class="form-label col-5">Number of years:</label>
+                        <select name="listNumOfYears" id="listNumOfYears" class="drop-down-menu col-7">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <button class="btn btn-primary full-width" id="btnCalculate">
+                            Calculate
+                        </button>
+                    </div>
                 </div>
-                <!-- step 4 -->
-                <div class="form-field">
-                    Choose a product:
-                    <!-- step 5 -->
-                    <label for="product">Product List</label>
-                    <select id="productList" class="drop-down-menu">
-                        <option name="select" value="Select">--Select--</option>
-                    </select>
-                    <!-- step 6 -->
-                    <i id="cart-message">To view your shopping cart click on the cart icon</i>
-                </div>
-                <div class="form-field">
-                    <!-- step 7 -->
-                    <button class="btn btn-primary full-width" id="btnAddProduct">Add to Cart</button>
-                </div>
-
             </div>
         </div>
-        <!-- step 8 -->
         <a href="../index.html" class="return-home">Return</a>
-        <div class="card">
-            <!-- step 9 -->
-            <div class="card-title">Shopping Cart</div>
-            <div class="card-content">
-                <table id="shoppingCart">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                    </tr>
-                </table>
+        <div class="assign-container">
+            <div class="assign-content">
+                <div class="card">
+                    <div class="card-title">Calculation as of <span id="today"></span>
+                    </div>
+                    <div class="card-content" id="futureValue">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <script src="../theme.js"></script>
-    <script type="module"></script>
+    <script type="module">
+        // import statements
+        import { FinanceCalculator } from "./finance-calculator.js";
+        import { Validator } from "./validator.js";
+
+
+        // set today span to current date
+        document.getElementById("today").innerHTML =
+            new Date().toLocaleDateString("en-US");
+
+        // register onclick event for btnCalculate
+        document.getElementById("btnCalculate").onclick = function () {
+            // get monthly payment value
+            const monthlyPayment =
+                document.getElementById("txtMonthlyPayment").value;
+            // get interest rate value
+            const rate = document.getElementById("txtYearlyRate").value;
+            // get number of years
+            const years = document.getElementById("listNumOfYears").value;
+            // get errorLog element
+            const errorLogEl = document.getElementById("errorLog");
+
+            // create new object of Validator for monthly payment field
+            const monthlyPaymentValidator = new Validator(
+                "Monthly Payment",
+                monthlyPayment
+            );
+            // add validators to the monthly payment field
+            monthlyPaymentValidator.addRequiredField();
+            monthlyPaymentValidator.addRequiredFloatField();
+            monthlyPaymentValidator.addFloatMinField(100);
+
+            // create new object of Validator for interest rate field
+            const rateValidator = new Validator("Interest Rate", rate);
+            // add validators for interest rate field
+            rateValidator.addRequiredField();
+            rateValidator.addRequiredFloatField();
+            rateValidator.addFloatMaxField(100);
+
+            // create empty array to store error messages
+            const errorLog = [];
+
+            // call validate function on monthlyPaymentValidator
+            if (!monthlyPaymentValidator.validate()) {
+                // if false, push error message to errorLog
+                for (let message of monthlyPaymentValidator.messages) {
+                    errorLog.push(message);
+                }
+            }
+            // call validate function on rateValidator
+            if (!rateValidator.validate()) {
+                // if false, push error message to errorLog
+                for (let message of rateValidator.messages) {
+                    errorLog.push(message);
+                }
+            }
+
+            console.table(errorLog);
+
+            // check if both input values pass validators
+            if (monthlyPaymentValidator.validate() && rateValidator.validate()) {
+                // if true
+                // clear any current error messages
+                errorLogEl.innerHTML = "";
+                // call calculateFutureValue
+                const futureValue = FinanceCalculator.calculateFutureValue(
+                    monthlyPayment,
+                    rate,
+                    years
+                );
+                // display futureValue
+                document.getElementById(
+                    "futureValue"
+                ).innerHTML = `The future value is ${FinanceCalculator.convertToCurrency(
+                    futureValue
+                )}`;
+            } else {
+                // if false
+                // clear any current error messages
+                errorLogEl.innerHTML = "";
+                // build an unordered list for new error messages
+                let errorLogMessage = `<ul>`;
+                // iterate over error log and build a new list item for each message
+                for (let message of errorLog) {
+                    errorLogMessage += `<li>${message}</li>`;
+                }
+                // close unordered list
+                errorLogMessage += `</ul>`;
+                // display the error messages
+                document.getElementById("errorLog").innerHTML = errorLogMessage;
+            }
+        };
+    </script>
 </body>
 
 </html>
