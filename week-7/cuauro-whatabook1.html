@@ -1,0 +1,77 @@
+<!--
+    ==============================================
+    ;   Title: cuauro-whatabook1.html
+    ;   Author: Richard Krasso
+    ;   Date: 02 13 2023
+    ;   Modified by: Patrick Cuauro
+    ;   Description: Whatabook1 app
+    ==============================================
+    -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Title of the page-->
+    <title>WEB 330 – Enterprise JavaScript II</title>
+    <!--Linked Styles including Google Fonts -->
+    <!-- CDN Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../theme.css" />
+    <link rel="stylesheet" href="../site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="light-theme">
+    <div id="container">
+        <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px"><span
+                id="icon-text"></span></i><br>
+        <!-- step 1 -->
+        <h1 class="app-header">Welcome to the WhatABook, Part 1</h1>
+        <div class="card">
+            <div class="card-title">Book Listing</div>
+            <div class="card-content" id="bookList">
+                <p>test</p>
+            </div>
+        </div>
+        <a href="../index.html" class="return-home">Return</a>
+        <div class="card">
+            <div class="card-title">Selected Book</div>
+            <div class="card-content" id="selectedBook">
+                <p>test</p>
+            </div>
+        </div>
+    </div>
+    <script src="../theme.js"></script>
+    <script type="module">
+        document.addEventListener(DOMContentLoaded);
+        let fileName = "books.xml";
+        fetch(fileName)
+            .then(fileName)
+            .then(res => res.text())
+            .then(data => {
+
+            });
+        let domParser = new DOMParser();
+        let xmlBooks = domParser(parseFromString());
+        loadBooks(xmlBooks);
+        function addIsbnClickEvents() {
+
+        };
+        function loadBooks(xml) {
+            let books = xml.getElementByTagName("book");
+            tableData = ???;
+            for (const shelf of books) {
+                let isbn = shelf.getElementByTagName("isbn")[0].childNodes[0].nodeValue;
+            }
+        }
+    </script>
+</body>
+
+</html>
