@@ -1,15 +1,4 @@
-<!--
-    ==============================================
-    ;   Title: books.xml
-    ;   Author: Richard Krasso
-    ;   Date: 02 13 2023
-    ;   Modified by: Patrick Cuauro
-    ;   Description: Small xml databse about books
-    ==============================================
-    -->
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- version?? -->
-<!--example from W3Schools https://www.w3schools.com/xml/xml_usedfor.asp-->
 <books>
     <book>
         <isbn>9780345339683</isbn>

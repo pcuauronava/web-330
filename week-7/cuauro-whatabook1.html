@@ -37,40 +37,88 @@
         <div class="card">
             <div class="card-title">Book Listing</div>
             <div class="card-content" id="bookList">
-                <p>test</p>
+                <!-- <p>test</p> -->
             </div>
         </div>
         <a href="../index.html" class="return-home">Return</a>
         <div class="card">
             <div class="card-title">Selected Book</div>
             <div class="card-content" id="selectedBook">
-                <p>test</p>
             </div>
         </div>
     </div>
     <script src="../theme.js"></script>
     <script type="module">
-        document.addEventListener(DOMContentLoaded);
-        let fileName = "books.xml";
+        // this asynchronous function shows the moment the page loads the DOM elements
+        document.addEventListener('DOMContentLoaded', (event) => {
+            console.log('DOM fully loaded and parsed');
+        });
+
+
+        let fileName = "./books.xml";
+        // this asynchronous function returns the information from the xml file 
         fetch(fileName)
-            .then(fileName)
-            .then(res => res.text())
-            .then(data => {
+            .then((response) => {
+                return response.text()
+            })
+            .then((data) => {
+                // after being loaded the data is parsed and manipulated
+                let domParser = new DOMParser();
+                // this takes the data and extracts the text, initially the file
+                // contained the header required from the professor requirements
+                // but it needed to be removed to avoid receiving that data
+                let xmlBooks = domParser.parseFromString(data, 'text/xml');
+                loadBooks(xmlBooks);
+                console.log(xmlBooks);
+                // call this function to retrieve the data from the isbn linked
+                //clicked after loaded on the list
+                addIsbnClickEvents();
 
             });
-        let domParser = new DOMParser();
-        let xmlBooks = domParser(parseFromString());
-        loadBooks(xmlBooks);
-        function addIsbnClickEvents() {
-
-        };
         function loadBooks(xml) {
-            let books = xml.getElementByTagName("book");
-            tableData = ???;
-            for (const shelf of books) {
-                let isbn = shelf.getElementByTagName("isbn")[0].childNodes[0].nodeValue;
+            // this function loads the data and bind it to a table header
+            // previously established
+            let tableData = '<table class="table" id="bookTable"><tr><th>ISBN</th><th>Title</th><th>Description</th><th>Pages</th><th>Authors</th></tr>';
+            // this variable is the result of the use of the selection of the elements in the DOM with
+            // the tag book on it, which bring the five books inside the data
+            let books = xml.getElementsByTagName('book');
+            let endTable = "</table>";
+            for (let book of books) {
+                //this loop will retrieve the elements in the DOM that contains the tags showed
+                //isbn, title, description, pages and author to build the table dynamically
+                let isbn = book.getElementsByTagName("isbn")[0].childNodes[0].nodeValue;
+                let title = book.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+                let description = book.getElementsByTagName("description")[0].childNodes[0].nodeValue;
+                let pages = book.getElementsByTagName("pages")[0].childNodes[0].nodeValue;
+                let author = book.getElementsByTagName("author")[0].childNodes[0].nodeValue;
+                tableData = tableData + `<tr><td data-value="ISBN"><a href="#" class="isbn-link">${isbn}</a></td><td data-value="Title">${title}</td><td data-value="Description">${description}</td><td data-value="Pages">${pages}</td><td data-value="Authors">${author}</td>`
             }
+            document.getElementById("bookList").innerHTML = tableData + endTable;
         }
+        function anchorClicked(e) {
+            // this function will return the data of the clicked ISBN link previously
+            // established on the dynamic table
+            e.preventDefault();
+            let self = this;
+            let cell = self.parentElement;
+            let row = cell.parentElement;
+            let data = row.querySelectorAll("td");
+            let bookData = `<ul style="list-style-type:none">`
+            let bookEndData = `</ul>`;
+            // this will retrieve the data of the clicked item and will fill up the selectedBook div
+            for (let field of data) {
+                bookData += `<li><b>${field.dataset.value}: </b>${field.innerText}</li>`
+            }
+            document.getElementById("selectedBook").innerHTML = bookData + bookEndData;
+        };
+        function addIsbnClickEvents() {
+            // this function works together with the previous function to detect
+            // the elements ISBN with the class isbn-link previously established on the dynamic table
+            let viewButtons = document.querySelectorAll("#bookTable tbody .isbn-link");
+            for (let index = 0; index < viewButtons.length; index++) {
+                viewButtons[index].addEventListener("click", anchorClicked);
+            }
+        };
     </script>
 </body>
 
