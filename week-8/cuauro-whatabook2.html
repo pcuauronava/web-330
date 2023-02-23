@@ -1,0 +1,133 @@
+<!--
+    ==============================================
+    ;   Title: cuauro-whatabook2.html
+    ;   Author: Richard Krasso
+    ;   Date: 02 21 2023
+    ;   Modified by: Patrick Cuauro
+    ;   Description: Whatabook2 app
+    ==============================================
+    -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Title of the page-->
+    <title>WEB 330 – Enterprise JavaScript II</title>
+    <!--Linked Styles including Google Fonts -->
+    <!-- CDN Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="cuauro-whatabook2.css">
+    <link rel="stylesheet" href="../theme.css" />
+    <link rel="stylesheet" href="../site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="light-theme">
+    <div id="container">
+        <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px"><span
+                id="icon-text"></span></i><br>
+        <!-- step 1 -->
+        <h1 class="app-header">Welcome to the WhatABook, Part 2</h1>
+        <div class="card">
+            <div class="card-title">Book Listing</div>
+            <div class="card-content" id="bookListing">
+                <!-- <p>test</p> -->
+            </div>
+        </div>
+        <a href="../index.html" class="return-home">Return</a>
+        <div class="card">
+            <div class="card-title">Selected Book</div>
+            <div class="card-content" id="selectedBook">
+            </div>
+        </div>
+    </div>
+    <script src="../theme.js"></script>
+    <script type="module">
+        import HttpClient from "./http-client.js"
+        let http = new HttpClient();
+        let isbn = [
+            '0345339681',
+            '0261103571'
+        ];
+        let params = {
+            "bibkeys": `ISBN:${isbn.join(",")}`,
+            "format": "json",
+            "jscmd": "details"
+        };
+        http.get("https://openlibrary.org/api/books", params)
+            .then(res => {
+                console.log(res);
+                document.getElementById("bookListing").innerHTML = buildHtmlString(res, "table");
+                addIsbnClickEvents();
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        function addIsbnClickEvents() {
+            // this function works together with the previous function to detect
+            // the elements ISBN with the class isbn-link previously established on the dynamic table
+            let viewButtons = document.querySelectorAll("#bookTable tbody .isbn-link");
+            for (let index = 0; index < viewButtons.length; index++) {
+                viewButtons[index].addEventListener("click", getBook);
+            }
+        };
+        function getBook(e) {
+            e.preventDefault();
+            let self = this;
+            let isbn = self.innerText;
+            let params = {
+                "bibkeys": `ISBN:${isbn.join(",")}`,
+                "format": "json",
+                "jscmd": "details"
+            }
+            http.get("https://openlibrary.org/api/books", params)
+                .then(res => {
+                    buildHtmlString(res, "ul");
+                    document.getElementById("selectedBook")
+                        .catch(error => {
+                            console.log(error);
+                        })
+                })
+        }
+        function buildHtmlString(res, format) {
+            let tableString = "<table><tr><th></th></tr>"
+            let ulString = "";
+
+            for (let key in res) {
+                ulString += `<ul style="list-style-type:none">`;
+
+                if (res.hasOwnProperty(key)) {
+                    let authors = [];
+                    if (res[key].details.authors) {
+                        authors = res[key].details.authors.map(function (author) {
+                            return author.name;
+                        })
+                    }
+                    let book = {
+                        isbn: res[key].details_isbn_13 ? res[key].details.isbn_13 : res[key].details.isb_10,
+                        title: res[key].details.title,
+                        description: res[key].details.subtitle ? res[key].details.subtitle : "N/A",
+                        authors: authors.join(",")
+                    }
+                    ulString += `<li><b>ISBN:</b>${book.isbn}</li><li><b>Title:</b>${book.title}</li><li><b>Description:</b>${book.description}</li><li><b>Pages:</b>${book.pages}</li><li><b>Authors:</b>${book.authors}`;
+                    tableString += `<tr><td><a href="#" class="isbn-link">${book.isbn}</a></td><td>${book.title}</td><td>${book.description}</td><td>${book.pages}</td><td>${book.authors}</td></tr>`
+                }
+            }
+            tableString = ulString + "</table>";
+            if (format == "table") {
+                return tableString;
+            } else {
+                return ulString;
+            }
+        }
+    </script>
+</body>
+
+</html>
