@@ -54,7 +54,14 @@
         let http = new HttpClient();
         let isbn = [
             '0345339681',
-            '0261103571'
+            '0261103571',
+            '9780593099322',
+            '9780261102361',
+            '9780261102378',
+            '9780590302715',
+            '9780316769532',
+            '9780743273565',
+            '9780590405959'
         ];
         let params = {
             "bibkeys": `ISBN:${isbn.join(",")}`,
@@ -73,7 +80,7 @@
         function addIsbnClickEvents() {
             // this function works together with the previous function to detect
             // the elements ISBN with the class isbn-link previously established on the dynamic table
-            let viewButtons = document.querySelectorAll("#bookTable tbody .isbn-link");
+            let viewButtons = document.querySelectorAll("#bookListing tbody .isbn-link");
             for (let index = 0; index < viewButtons.length; index++) {
                 viewButtons[index].addEventListener("click", getBook);
             }
@@ -83,21 +90,21 @@
             let self = this;
             let isbn = self.innerText;
             let params = {
-                "bibkeys": `ISBN:${isbn.join(",")}`,
+                "bibkeys": `ISBN:${isbn}`,
                 "format": "json",
                 "jscmd": "details"
             }
             http.get("https://openlibrary.org/api/books", params)
                 .then(res => {
-                    buildHtmlString(res, "ul");
-                    document.getElementById("selectedBook")
-                        .catch(error => {
-                            console.log(error);
-                        })
+                    // buildHtmlString(res, "ul");
+                    document.getElementById("selectedBook").innerHTML = buildHtmlString(res, "ul");
+                })
+                .catch(error => {
+                    console.log(error);
                 })
         }
         function buildHtmlString(res, format) {
-            let tableString = "<table><tr><th></th></tr>"
+            let tableString = "<table><tr><th>ISBN</th><th>Title</th><th>Description</th><th>Pages</th><th>Author</th></tr>"
             let ulString = "";
 
             for (let key in res) {
@@ -111,16 +118,17 @@
                         })
                     }
                     let book = {
-                        isbn: res[key].details_isbn_13 ? res[key].details.isbn_13 : res[key].details.isb_10,
+                        isbn: res[key].details.isbn_13 ? res[key].details.isbn_13 : res[key].details.isb_10,
                         title: res[key].details.title,
                         description: res[key].details.subtitle ? res[key].details.subtitle : "N/A",
+                        pages: res[key].details.number_of_pages ? res[key].details.number_of_pages : "N/A",
                         authors: authors.join(",")
                     }
                     ulString += `<li><b>ISBN:</b>${book.isbn}</li><li><b>Title:</b>${book.title}</li><li><b>Description:</b>${book.description}</li><li><b>Pages:</b>${book.pages}</li><li><b>Authors:</b>${book.authors}`;
                     tableString += `<tr><td><a href="#" class="isbn-link">${book.isbn}</a></td><td>${book.title}</td><td>${book.description}</td><td>${book.pages}</td><td>${book.authors}</td></tr>`
                 }
             }
-            tableString = ulString + "</table>";
+            tableString = tableString + "</table>";
             if (format == "table") {
                 return tableString;
             } else {
