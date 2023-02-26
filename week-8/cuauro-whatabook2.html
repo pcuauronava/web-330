@@ -50,8 +50,10 @@
     </div>
     <script src="../theme.js"></script>
     <script type="module">
+        // import the class from the javaScript file http-client.js
         import HttpClient from "./http-client.js"
         let http = new HttpClient();
+        // this is an index of the isbn of the books selected for this example
         let isbn = [
             '0345339681',
             '0261103571',
@@ -63,15 +65,18 @@
             '9780743273565',
             '9780590405959'
         ];
+        // note the parameters used to retrieve the data from the webpage
         let params = {
             "bibkeys": `ISBN:${isbn.join(",")}`,
             "format": "json",
             "jscmd": "details"
         };
+        // this page provides the API to retrieve the books based on the ISBN
         http.get("https://openlibrary.org/api/books", params)
             .then(res => {
                 console.log(res);
                 document.getElementById("bookListing").innerHTML = buildHtmlString(res, "table");
+                // after we load the table with the books we assign the ISBN an anchor
                 addIsbnClickEvents();
             })
             .catch(e => {
@@ -103,11 +108,13 @@
                     console.log(error);
                 })
         }
+        // with this function we dynamically create the table to be filled with the data
         function buildHtmlString(res, format) {
             let tableString = "<table><tr><th>ISBN</th><th>Title</th><th>Description</th><th>Pages</th><th>Author</th></tr>"
             let ulString = "";
 
             for (let key in res) {
+                // the style type none remove the bullet from the list
                 ulString += `<ul style="list-style-type:none">`;
 
                 if (res.hasOwnProperty(key)) {
