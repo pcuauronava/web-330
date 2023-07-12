@@ -19,9 +19,3 @@ export default class HttpClient {
         return res.json();
     }  
 }
-
-// export function get(){
-//     let response = fetch('https://openlibrary.org/api/books');
-// let data = response.tostring();
-// return data;
-// }
